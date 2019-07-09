@@ -1,3 +1,10 @@
+
+
+*** Work in progress ***
+
+*** 作成途中 ***
+
+
 # edn-file-aot-resolver
 
 Refer a part of edn-file AoT, embed as immediate value
@@ -12,12 +19,14 @@ ednファイルの一部をコンパイル時に参照し、即値として埋�
 
 ## Usage
 
-```sh
+```clojure
 $ cat dev.cljs.edn
 ^{:watch-dirs ["src" "src-dev"]
   :css-dirs ["resources/public/css"]}
 {:main foo.core
  :output-to "cljs-out/cl.js"
+ :ring-server-options {:host "0.0.0.0"
+                       :port 9500}
  }
 {:deps {org.clojure/clojure {:mvn/version "1.10.1"}
         org.clojure/clojurescript {:mvn/version "1.10.520"}
@@ -41,6 +50,10 @@ $ cat dev.cljs.edn
 (efar/get-in [:deps 'com.example/foo :mvn/version] :fallback) ; => :fallback
 
 (efar/get-in [:paths 1]) ; => "target"
+
+(efar/get-meta :main) ; => 'foo.core
+
+(efar/get-in-meta [:ring-server-options :port]) ; => 9500
 
 ```
 
@@ -69,30 +82,12 @@ for cljs:
     変更した際には一旦 `target/` 配下を破棄し、古い値が埋め込まれた
     コンパイル後ファイルを明示的に削除した方がよいでしょう。
 
-- You should not write a code like `(:url (efar/license))`.
-  It expand to
-  `(:url {:name "Unlicense", :url "http://unlicense.org/UNLICENSE"})`.
-  - This code should be `(efar/n [:license :url])`.
-    It expand to `"http://unlicense.org/UNLICENSE"`.
-
-- `deps.edn`には、上記のleiningen用の内部値も含め、
-  「不特定多数に公開されてほしくない値」が含まれる可能性があります。
-  余分な情報が`*.class`に含まれてしまわないように注意してください。
-  - 例えば `(:url (efar/license))` は
-    `(:url {:name "Unlicense", :url "http://unlicense.org/UNLICENSE"})`
-    のように展開される為、別に使う必要のない `:name` のエントリまで
-    `*.class` に含まれてしまいます。
-    これは動作には全く問題ありませんが、dumpする事で情報を読めてしまいます。
-    なるべく `(efar/n [:license :url])` のように指定してください。
-    - この例では読まれてもどうという事はないですが、
-      プライベートリポジトリの設定、アカウント情報、ビルドPCのpath情報、
-      等々が同様の経路で流出してしまわないように気をつけてください。
 
 
 ## ChangeLog
 
-- 0.1.0 (2019-07-09)
-    - Initial release
+- 0.1.0-SNAPSHOT (20XX-XX-XX)
+    - Initial release (not yet)
 
 
 
