@@ -5,6 +5,10 @@
 *** 作成途中 ***
 
 
+TODO: Add tests
+
+
+
 # edn-file-aot-resolver
 
 Refer a part of edn-file AoT, embed as immediate value
