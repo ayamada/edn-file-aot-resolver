@@ -1,6 +1,6 @@
 (ns edn-file-aot-resolver.core
   (:refer-clojure :exclude [get get-in])
-  (:require [clojure.java.io]))
+  (:require [clojure.java.io :as io]))
 
 ;;; TODO: Cache contents of files safely
 ;;;       (DO NOT IMPORT CACHE DATA TO BUILT FILES !!!)

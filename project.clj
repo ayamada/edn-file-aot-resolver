@@ -4,4 +4,6 @@
   :license {:name "Zlib License"
             :url "https://opensource.org/licenses/Zlib"}
   ;:pedantic? :abort
-  :dependencies [])
+  :dependencies []
+  :profiles {:test {:dependencies [[org.clojure/clojure "1.10.1"]]}}
+  )

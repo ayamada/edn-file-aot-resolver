@@ -1,0 +1,7 @@
+^{:watch-dirs ["src" "src-dev"]
+  :css-dirs ["resources/public/css"]}
+{:main foo.core
+ :output-to "cljs-out/cl.js"
+ :foreign-libs [{:file "js/pixi.min.js" :provides ["PIXI"]}
+                {:file "js/lz-string.min.js" :provides ["LZString"]}]
+ :externs ["externs/pixi.js" "externs/lz-string.js"]}
