@@ -92,6 +92,9 @@ for cljs
 
 ## ChangeLog
 
+- 1.0.1 (2019-08-04)
+    - Don't throw exception by defpath overwriting, but println warnings
+
 - 1.0.0 (2019-08-04)
     - Initial release
 

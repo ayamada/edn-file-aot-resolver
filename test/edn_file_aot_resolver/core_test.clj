@@ -8,9 +8,9 @@
       "test-resources/dev.cljs.edn")
     (is (= (efar/get :path/dev.cljs.edn :main)
            'foo.core))
-    (is (thrown? clojure.lang.Compiler$CompilerException
-                 (eval '(edn-file-aot-resolver.core/defpath :path/dev.cljs.edn
-                          "another-file"))))
+    (with-out-str
+      (eval '(edn-file-aot-resolver.core/defpath :path/dev.cljs.edn
+               "another-file")))
     )
   (testing "efar/get"
     (is (= (efar/get "test-resources/dev.cljs.edn" :main)
@@ -52,7 +52,7 @@
     (is (thrown? clojure.lang.Compiler$CompilerException
                  (eval '(edn-file-aot-resolver.core/get "not-exists-file" 1))))
     (is (thrown? clojure.lang.Compiler$CompilerException
-                 (eval '(edn-file-aot-resolver.core/get "README.md" :foo))))
+                 (eval '(edn-file-aot-resolver.core/get "test-resources/not-edn.txt" :foo))))
     )
   )
 

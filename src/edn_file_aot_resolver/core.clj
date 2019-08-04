@@ -11,9 +11,13 @@
 (defmacro defpath [k path]
   (assert (keyword? k))
   (assert (string? path))
-  (assert (not (@global-path-table k))
-          (str "cannot reregister key " k))
-  (swap! global-path-table assoc k path)
+  (if-let [p (@global-path-table k)]
+    (println (str "Warning: already registered key "
+                  (pr-str k)
+                  " as "
+                  (pr-str p)
+                  " , skipped."))
+    (swap! global-path-table assoc k path))
   nil)
 
 
