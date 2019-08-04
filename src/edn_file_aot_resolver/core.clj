@@ -5,19 +5,23 @@
 ;;; TODO: Cache contents of files safely
 ;;;       (DO NOT IMPORT CACHE DATA TO BUILT FILES !!!)
 
+
+(def ^:private global-path-table (atom {}))
+
+(defmacro defpath [k path]
+  (assert (keyword? k))
+  (assert (string? path))
+  (assert (not (@global-path-table k))
+          (str "cannot reregister key " k))
+  (swap! global-path-table assoc k path)
+  nil)
+
+
 (defn- read-from-edn-file [path]
-  (let [data-src (when (.exists (io/file path))
-                   (try
-                     (slurp path)
-                     (catch Throwable e
-                       (.printStackTrace e)
-                       nil)))
+  (assert (.exists (io/file path)))
+  (let [data-src (slurp path)
         data (when data-src
-               (try
-                 (read-string data-src)
-                 (catch Throwable e
-                   (.printStackTrace e)
-                   nil)))]
+               (read-string data-src))]
     data))
 
 
@@ -76,10 +80,13 @@
 
 
 (defn- get-in-from-edn-file-internal [path ks else meta?]
-  (assert (string? path) "path must be string")
   (assert (coll? ks) "ks must be collection")
   (assert (not (empty? ks)) "must need at least one key")
-  (let [data (read-from-edn-file path)
+  (let [path (if (keyword? path)
+               (@global-path-table path)
+               path)
+        _ (assert (string? path) "path must be string or defpath keyword")
+        data (read-from-edn-file path)
         ks-resolved (mapv resolve-macro-argument ks)
         target (if meta?
                  (meta data)

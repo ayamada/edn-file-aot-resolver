@@ -1,21 +1,10 @@
-
-
-*** Work in progress ***
-
-*** 作成途中 ***
-
-
-TODO: Add tests
-
-
-
 # edn-file-aot-resolver
 
 Refer a part of edn-file in local fs AoT, embed as immediate value
 
 ednファイルの一部をコンパイル時に参照し、即値として埋め込む
 
-This library aims to embed configurable parameters to built cljs code, mainly.
+This library aims to embed configurable parameters to built cljs code.
 
 主に、cljsコードに設定値を埋め込む用途を想定しています。
 
@@ -47,21 +36,25 @@ for clj:
 
 (efar/get "./dev.cljs.edn" :main) ; => 'foo.core
 
-(efar/get "./dev.cljs.edn" :output-to) ; => "cljs-out/cl.js"
+(efar/defpath ::dce "./dev.cljs.edn")
 
-(efar/get "./dev.cljs.edn" :abc) ; => nil
+(efar/get ::dce :main) ; => 'foo.core
 
-(efar/get "./dev.cljs.edn" :abc "fallback") ; => "fallback"
+(efar/get ::dce :output-to) ; => "cljs-out/cl.js"
 
-(efar/get-in "./dev.cljs.edn" [:foreign-libs 0 :file]) ; => "js/pixi.min.js"
+(efar/get ::dce :abc) ; => nil
 
-(efar/get-in "./dev.cljs.edn" [:foreign-libs 9 :file] :fallback) ; => :fallback
+(efar/get ::dce :abc "fallback") ; => "fallback"
 
-(efar/get-in "./dev.cljs.edn" [:externs 1]) ; => "externs/lz-string.js"
+(efar/get-in ::dce [:foreign-libs 0 :file]) ; => "js/pixi.min.js"
 
-(efar/get-meta "./dev.cljs.edn" :watch-dirs) ; => ["src" "src-dev"]
+(efar/get-in ::dce [:foreign-libs 9 :file] :fallback) ; => :fallback
 
-(efar/get-in-meta "./dev.cljs.edn" [:watch-dirs 1]) ; => "src-dev"
+(efar/get-in ::dce [:externs 1]) ; => "externs/lz-string.js"
+
+(efar/get-meta ::dce :watch-dirs) ; => ["src" "src-dev"]
+
+(efar/get-in-meta ::dce [:watch-dirs 1]) ; => "src-dev"
 ```
 
 for cljs:
