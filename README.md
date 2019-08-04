@@ -1,3 +1,9 @@
+[![Build Status](https://travis-ci.org/ayamada/edn-file-aot-resolver.svg?branch=master)](https://travis-ci.org/ayamada/edn-file-aot-resolver)
+[![Clojars Project](https://img.shields.io/clojars/v/jp.ne.tir/edn-file-aot-resolver.svg)](https://clojars.org/jp.ne.tir/edn-file-aot-resolver)
+[![release version](https://img.shields.io/github/release/ayamada/edn-file-aot-resolver.svg)](https://github.com/ayamada/edn-file-aot-resolver/releases)
+[![license](https://img.shields.io/github/license/ayamada/edn-file-aot-resolver.svg)](LICENSE)
+
+
 # edn-file-aot-resolver
 
 Refer a part of edn-file in local fs AoT, embed as immediate value
@@ -28,7 +34,7 @@ This library aims to embed configurable parameters to built cljs code.
  :externs ["externs/pixi.js" "externs/lz-string.js"]}
 ```
 
-for clj:
+for clj
 
 ```clojure
 (ns xxx.yyy
@@ -57,7 +63,7 @@ for clj:
 (efar/get-in-meta ::dce [:watch-dirs 1]) ; => "src-dev"
 ```
 
-for cljs:
+for cljs
 
 ```clojure
 (ns xxx.yyy
