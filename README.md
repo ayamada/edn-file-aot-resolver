@@ -17,7 +17,7 @@ This library aims to embed configurable parameters to built cljs code.
 
 ## Install
 
-[![Clojars Project](http://clojars.org/jp.ne.tir/edn-file-aot-resolver/latest-version.svg)](http://clojars.org/jp.ne.tir/edn-file-aot-resolver)
+- https://clojars.org/jp.ne.tir/edn-file-aot-resolver
 
 
 ## Usage
