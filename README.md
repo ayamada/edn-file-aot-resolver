@@ -63,7 +63,7 @@ for cljs:
 (ns xxx.yyy
   (:require-macros [edn-file-aot-resolver.core :as efar]))
 
-;;; Same as for clj
+;;; Same as clj
 ```
 
 
@@ -86,8 +86,8 @@ for cljs:
 
 ## ChangeLog
 
-- 0.1.0-SNAPSHOT (20XX-XX-XX)
-    - Initial release (not yet)
+- 1.0.0 (2019-08-04)
+    - Initial release
 
 
 
