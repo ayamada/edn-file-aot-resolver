@@ -22,6 +22,15 @@
     (is (= (efar/get "test-resources/dev.cljs.edn" :abc
                      "fallback")
            "fallback"))
+    (is (= (efar/get "test-resources/dev.cljs.edn" :abc
+                     '(+ 1 2))
+           '(+ 1 2)))
+    (is (= (efar/get "test-resources/dev.cljs.edn" :abc
+                     (+ 1 2))
+           (+ 1 2)))
+    (is (= (efar/get "test-resources/dev.cljs.edn" :abc
+                     'foo/bar)
+           'foo/bar))
     )
   (testing "efar/get-in"
     (is (= (efar/get-in "test-resources/dev.cljs.edn"
